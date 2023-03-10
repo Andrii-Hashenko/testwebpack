@@ -1,5 +1,5 @@
 const path = require("path");
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -10,10 +10,23 @@ module.exports = {
     filename: "[name].bundle.js",
   },
   plugins: [
-new HtmlWebpackPlugin({
-title: 'webpack Boilerplate',
-template: path.resolve(__dirname, './src/index.html'),
-filename: 'index.html',
-}),
+    new HtmlWebpackPlugin({
+      title: "webpack Boilerplate",
+      template: path.resolve(__dirname, "./src/index.html"),
+      filename: "index.html",
+    }),
   ],
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: ["babel-loader"],
+      },
+      {
+        test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+        type: "asset/resource",
+      },
+    ],
+  },
 };
